@@ -1,22 +1,26 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "A backend for the HRM Application",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "kime",
-  "license": "ISC",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "dotenv": "^9.0.0",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "mariadb": "^2.5.3",
-    "morgan": "^1.10.0",
-    "sequelize": "^6.6.2"
-  }
+    "name": "server",
+    "version": "1.0.0",
+    "description": "A backend for the HRM Application",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node Index.js",
+        "dev": "nodemon Index.js"
+    },
+    "author": "kime",
+    "license": "ISC",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "dotenv": "^9.0.0",
+        "express": "^4.17.1",
+        "jsonwebtoken": "^8.5.1",
+        "mariadb": "^2.5.3",
+        "morgan": "^1.10.0",
+        "sequelize": "^6.6.2",
+        "uuid": "^8.3.2",
+        "validator": "^13.6.0"
+    }
 }
