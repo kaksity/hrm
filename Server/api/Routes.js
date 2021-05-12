@@ -13,6 +13,11 @@ const GetPositionController = require('../controllers/Position/GetPositionsContr
 const PostPositionController = require('../controllers/Position/PostPositionsController');
 const PutPositionController = require('../controllers/Position/PutPositionsController');
 
+//Reason For Leave
+const GetReasonForLeavesController = require('../controllers/ReasonForLeaves/GetReasonForLeavesController');
+const PostReasonForLeavesController = require('../controllers/ReasonForLeaves/PostReasonForLeavesController');
+const DeleteReasonForLeavesController = require('../controllers/ReasonForLeaves/DeleteReasonForLeavesController');
+
 const Router = Express.Router();
 
 Router.post('/login', PostLoginController);
@@ -29,5 +34,10 @@ Router.put('/employees/:id', PutEmployeesController);
 Router.delete('/employees/:id', DeleteEmployeesController);
 Router.get('/employees/:id', GetEmployeesController.SingleRecord);
 Router.get('/employees', GetEmployeesController.GetAll);
+
+//Reason For Leaves
+Router.get('/reason-for-leaves', GetReasonForLeavesController);
+Router.post('/reason-for-leaves', PostReasonForLeavesController);
+Router.delete('/reason-for-leaves/:id', DeleteReasonForLeavesController);
 
 module.exports = Router;
