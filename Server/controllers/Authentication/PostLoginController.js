@@ -70,7 +70,7 @@ module.exports = async(req, res) => {
             }
 
             const AuthenticationTokenJSON = {
-                auth_id: AuthenticationQueryResult.id
+                id: AuthenticationQueryResult.id
             }
             return res.status(200).json({
                 success: true,
