@@ -15,10 +15,9 @@ module.exports = async(req, res, next) => {
         AuthorizationToken = AuthorizationToken.split(' ')[1];
 
         let User = await Jwt.verify(AuthorizationToken, process.env.JWT_SECRET_KEY);
-        console.log(User);
 
         let UserObj = {
-            id: User.auth_id
+            id: User.id
         }
 
         req.User = UserObj;

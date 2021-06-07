@@ -10,7 +10,8 @@ module.exports = async(req, res) => {
         let Description = req.body.description;
         let StartLeaveDate = req.body.start_leave_date;
         let EndLeaveDate = req.body.end_leave_date;
-        console.log(req.body);
+
+        console.log(req.User);
         let AuthenticationId = req.User.id;
 
         if (Validator.isUUID(ReasonForLeave) == false) {
@@ -20,6 +21,7 @@ module.exports = async(req, res) => {
                 description: ''
             });
         }
+
         // if (Validator.isDate(StartLeaveDate) == false) {
         //     return res.status(400).json({
         //         success: false,
@@ -44,6 +46,7 @@ module.exports = async(req, res) => {
                 attributes: ['id']
             }]
         });
+
         //console.log(AuthenticationQueryResult);
         console.log(AuthenticationQueryResult);
         let EmployeeId = AuthenticationQueryResult.employee.id;
