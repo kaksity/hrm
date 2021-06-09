@@ -78,18 +78,18 @@ module.exports = async(req, res) => {
                     message: 'Password must be 8 or more characters'
                 });
             }
+            if (Validator.isEmpty(ConfirmPassword)) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'Confirm Password is required'
+                });
+            }
             if (Password != ConfirmPassword) {
                 return res.status(400).json({
                     success: false,
                     message: 'Password must match Confirm Password'
                 });
             }
-        }
-        if (Validator.isEmpty(ConfirmPassword)) {
-            return res.status(400).json({
-                success: false,
-                message: 'Confirm Password is required'
-            });
         }
         if (Gender != 'M' && Gender != 'F') {
             return res.status(400).json({
@@ -200,7 +200,7 @@ module.exports = async(req, res) => {
             }
 
         } catch (e) {
-            console.log(e);
+
             return res.status(500).json({
                 success: false,
                 message: 'Something went wrong. Try again',

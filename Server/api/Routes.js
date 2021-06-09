@@ -25,6 +25,7 @@ const DeleteReasonForLeavesController = require('../controllers/ReasonForLeaves/
 const PostLeaveApplicationsController = require('../controllers/LeaveApplications/PostLeaveApplicationsController');
 const DeleteLeaveApplicationsController = require('../controllers/LeaveApplications/DeleteLeaveApplicationsController');
 const GetLeaveApplicationsController = require('../controllers/LeaveApplications/GetLeaveApplicationsController');
+const GetUserTypesController = require('../controllers/UserTypes/GetUserTypesController');
 const Router = Express.Router();
 
 Router.post('/login', PostLoginController);
@@ -34,6 +35,9 @@ Router.get('/general/positions', [VerifyJWTToken], GetPositionController);
 Router.put('/general/positions/:id', [VerifyJWTToken], PutPositionController);
 Router.delete('/general/positions/:id', [VerifyJWTToken], DeletePositionsController);
 Router.post('/general/positions', [VerifyJWTToken], PostPositionController);
+
+//User Types
+Router.get('/general/user-types', [VerifyJWTToken], GetUserTypesController);
 
 //Employee Routes
 Router.post('/employees', [VerifyJWTToken], PostEmployeeController);

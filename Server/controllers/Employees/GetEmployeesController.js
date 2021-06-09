@@ -2,6 +2,7 @@ const Validator = require('validator');
 const Authentication = require('../../Models/Authentication');
 const Employee = require('../../Models/Employee');
 const Position = require('../../Models/Position');
+const UserType = require('../../Models/UserType');
 
 exports.SingleRecord = async(req, res) => {
     try {
@@ -24,7 +25,9 @@ exports.SingleRecord = async(req, res) => {
                 model: Employee,
                 include: [{
                     model: Position
-                }]
+                }],
+            }, {
+                model: UserType,
             }]
         });
 
@@ -39,6 +42,10 @@ exports.SingleRecord = async(req, res) => {
                 value: AuthenticationEmployeeQueryResult.employee.gender,
                 text: (AuthenticationEmployeeQueryResult.employee.gender == 'M') ? 'MALE' : 'FEMALE',
             },
+            user_type: {
+                id: AuthenticationEmployeeQueryResult.user_type.id,
+                name: AuthenticationEmployeeQueryResult.user_type.name,
+            },
             position: {
                 id: AuthenticationEmployeeQueryResult.employee.position_id,
                 text: AuthenticationEmployeeQueryResult.employee.position.name,
@@ -46,7 +53,11 @@ exports.SingleRecord = async(req, res) => {
             address: AuthenticationEmployeeQueryResult.employee.address,
         };
 
-        res.send(Data);
+        return res.status(200).json({
+            success: true,
+            message: 'Retrived Staff Details',
+            data: Data
+        });
     } catch (e) {
         console.log(e);
         return res.status(500).json({
