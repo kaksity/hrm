@@ -150,7 +150,6 @@
                     <v-text-field
                       v-model="Password"
                       label="Password "
-                      type="password"
                       @keyup.enter.native="CreateEmployee"
                       :append-icon="showPwd ? 'visibility_off' : 'visibility'"
                       :type="showPwd ? 'text' : 'password'"

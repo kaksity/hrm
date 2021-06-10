@@ -87,7 +87,7 @@ export default {
       if (this.Position === '') {
         this.$message({
           type: 'error',
-          text: 'Position is required'
+          text: 'Position is required',
         });
         return;
       }
