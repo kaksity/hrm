@@ -6,7 +6,7 @@ import Layout from '@/views/layouts/AppLayout.vue';
 
 Vue.use(Router);
 import Employees from './modules/Employees';
-import Positions from './modules/Positions';
+import LeavesApplications from './modules/LeavesApplications';
 
 /**
  * TIPS:
@@ -63,6 +63,7 @@ export default new Router({
                     },
                 },
                 Employees,
+                LeavesApplications,
                 {
                     path: '/positions',
                     name: 'Positions',
@@ -81,6 +82,33 @@ export default new Router({
                     },
                     component: () =>
                         import ('@/views/Employees/ViewAndUpdate.vue'),
+                },
+                {
+                    path: '/leaves-applications/pending/details/:id',
+                    name: 'LeavePendingDetails',
+                    meta: {
+                        hidden: true,
+                    },
+                    component: () =>
+                        import ('@/views/LeaveApplications/Details.vue'),
+                },
+                {
+                    path: '/leaves-applications/approved/details/:id',
+                    name: 'LeaveApprovedDetails',
+                    meta: {
+                        hidden: true,
+                    },
+                    component: () =>
+                        import ('@/views/LeaveApplications/Details.vue'),
+                },
+                {
+                    path: '/leaves-applications/rejected/details/:id',
+                    name: 'LeaveApprovedDetails',
+                    meta: {
+                        hidden: true,
+                    },
+                    component: () =>
+                        import ('@/views/LeaveApplications/Details.vue'),
                 },
             ],
         },

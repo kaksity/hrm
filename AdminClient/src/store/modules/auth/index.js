@@ -18,9 +18,7 @@ const actions = {
         }, res => Promise.reject(res));
     },
     logout({ commit }) {
-        return API.logout().then(() => {
-            commit(types.LOGOUT);
-        }, res => Promise.reject(res));
+        commit(types.LOGOUT);
     },
 };
 

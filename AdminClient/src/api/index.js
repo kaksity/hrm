@@ -33,9 +33,9 @@ export default new function API() {
     this.readMe = params => request.get(authUrls.readMe, params);
     this.GetReasonForLeave = () => request.get('/reason-for-leaves');
 
-    this.PostLeaveApplication = params => request.post('/leave-applications', params);
-    this.GetLeaveApplications = () => request.get('/leave-applications');
-    this.DeleteLeaveApplications = id => request.delete(`/leave-applications/${id}`);
+    this.GetLeaveApplications = types => request.get(`/leave-applications/admin?type=${types}`);
+    this.GetDetailsLeaveApplications = id => request.get(`/leave-applications/admin/details/${id}`);
+    this.PutLeaveApplications = (id, params) => request.put(`/leave-applications/admin/details/${id}`, params);
 
     this.GetPositions = () => request.get('/general/positions');
     this.PostPosition = params => request.post('/general/positions', params);

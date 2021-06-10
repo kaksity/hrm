@@ -19,7 +19,7 @@
           :to="{ name : 'Dashboard' }"
           class="toolbar-title"
         >
-          <span>499 Leave Management System | Employee</span>
+          <span>499 Leave Management System | ADMIN</span>
         </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>

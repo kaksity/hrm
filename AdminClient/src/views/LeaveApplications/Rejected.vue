@@ -22,12 +22,12 @@
                 slot="items"
                 slot-scope="props"
               >
+                <td>{{ props.item.employee }}</td>
                 <td>{{ props.item.reason_for_leave }}</td>
                 <td>{{ props.item.date_of_request }}</td>
                 <td>{{ props.item.status }}</td>
                 <td>
-                  <v-icon @click="GoToDetails(props.item.id)">camera</v-icon>
-                  <v-icon @click="DeleteLeaveApplication(props.item.id)">delete</v-icon>
+                  <v-icon @click="GoToLeaveApplicationDetails(props.item.id)">camera</v-icon>
                 </td>
               </template>
             </v-data-table>
@@ -45,6 +45,12 @@ export default {
     return {
       IsLoading: false,
       headers: [
+        {
+          text: 'Employee',
+          align: 'left',
+          sortable: false,
+          value: 'employee',
+        },
         {
           text: 'Reason For Leave',
           align: 'left',
@@ -74,32 +80,18 @@ export default {
   },
   methods: {
     GetAllLeaveApplications() {
-      this.$api.GetLeaveApplications().then((res) => {
+      this.$api.GetLeaveApplications('rejected').then((res) => {
         this.list = res.data;
       }).catch((err) => {
         console.log(err);
         this.$message({
           type: 'error',
-          text: err.message,
+          text: err.data.message,
         });
       });
     },
-    DeleteLeaveApplication(id) {
-      this.$api.DeleteLeaveApplications(id).then((res) => {
-        this.$message({
-          type: 'success',
-          text: res.message,
-        });
-        this.GetAllLeaveApplications();
-      }).catch((err) => {
-        this.$message({
-          type: 'error',
-          text: err.message,
-        });
-      });
-    },
-    GoToDetails(id) {
-      this.$router.push({ path: `/leaves/view-details/${id}` });
+    GoToLeaveApplicationDetails(id) {
+      this.$router.push({ path: `/leaves-applications/rejected/details/${id}` });
     },
   },
   created() {

@@ -100,7 +100,7 @@ export default {
           if (routes[i].children) {
             for (let j = 0, len = routes[i].children.length; j < len; j += 1) {
               const child = routes[i].children[j];
-              if (child.name === routeName) {
+              if (child.name) {
                 return routes[i].children;
               }
             }
