@@ -2,6 +2,7 @@ const Express = require('express');
 
 //Middlewares
 const VerifyJWTToken = require('../Middlewares/VerifyJWTToken');
+const VerifyAdminStatus = require('../Middlewares/VerifyAdminStatus');
 
 //Employees Controllers
 const PostLoginController = require('../controllers/Authentication/PostLoginController');
@@ -25,6 +26,9 @@ const DeleteReasonForLeavesController = require('../controllers/ReasonForLeaves/
 const PostLeaveApplicationsController = require('../controllers/LeaveApplications/PostLeaveApplicationsController');
 const DeleteLeaveApplicationsController = require('../controllers/LeaveApplications/DeleteLeaveApplicationsController');
 const GetLeaveApplicationsController = require('../controllers/LeaveApplications/GetLeaveApplicationsController');
+const PutLeaveApplicationsController = require('../controllers/LeaveApplications/PutLeaveApplicationsController');
+
+//User Types
 const GetUserTypesController = require('../controllers/UserTypes/GetUserTypesController');
 const Router = Express.Router();
 
@@ -32,28 +36,31 @@ Router.post('/login', PostLoginController);
 
 //Position Routes
 Router.get('/general/positions', [VerifyJWTToken], GetPositionController);
-Router.put('/general/positions/:id', [VerifyJWTToken], PutPositionController);
-Router.delete('/general/positions/:id', [VerifyJWTToken], DeletePositionsController);
-Router.post('/general/positions', [VerifyJWTToken], PostPositionController);
+Router.put('/general/positions/:id', [VerifyJWTToken, VerifyAdminStatus], PutPositionController);
+Router.delete('/general/positions/:id', [VerifyJWTToken, VerifyAdminStatus], DeletePositionsController);
+Router.post('/general/positions', [VerifyJWTToken, VerifyAdminStatus], PostPositionController);
 
 //User Types
 Router.get('/general/user-types', [VerifyJWTToken], GetUserTypesController);
 
 //Employee Routes
-Router.post('/employees', [VerifyJWTToken], PostEmployeeController);
-Router.put('/employees/:id', [VerifyJWTToken], PutEmployeesController);
-Router.delete('/employees/:id', [VerifyJWTToken], DeleteEmployeesController);
+Router.post('/employees', [VerifyJWTToken, VerifyAdminStatus], PostEmployeeController);
+Router.put('/employees/:id', [VerifyJWTToken, VerifyAdminStatus], PutEmployeesController);
+Router.delete('/employees/:id', [VerifyJWTToken, VerifyAdminStatus], DeleteEmployeesController);
 Router.get('/employees/:id', [VerifyJWTToken], GetEmployeesController.SingleRecord);
 Router.get('/employees', [VerifyJWTToken], GetEmployeesController.GetAll);
 
 //Reason For Leaves
 Router.get('/reason-for-leaves', [VerifyJWTToken], GetReasonForLeavesController);
-Router.post('/reason-for-leaves', [VerifyJWTToken], PostReasonForLeavesController);
-Router.delete('/reason-for-leaves/:id', [VerifyJWTToken], DeleteReasonForLeavesController);
+Router.post('/reason-for-leaves', [VerifyJWTToken, VerifyAdminStatus], PostReasonForLeavesController);
+Router.delete('/reason-for-leaves/:id', [VerifyJWTToken, VerifyAdminStatus], DeleteReasonForLeavesController);
 
 // Leave Application
 Router.post('/leave-applications', [VerifyJWTToken], PostLeaveApplicationsController);
 Router.delete('/leave-applications/:id', [VerifyJWTToken], DeleteLeaveApplicationsController);
-Router.get('/leave-applications/:id', [VerifyJWTToken], GetLeaveApplicationsController.Single);
 Router.get('/leave-applications', [VerifyJWTToken], GetLeaveApplicationsController.AllRecord);
+Router.get('/leave-applications/admin/', [VerifyJWTToken, VerifyAdminStatus], GetLeaveApplicationsController.AdminAllRecord);
+Router.get('/leave-applications/admin/details/:id', [VerifyJWTToken, VerifyAdminStatus], GetLeaveApplicationsController.AdminSingle);
+Router.put('/leave-applications/admin/details/:id', [VerifyJWTToken, VerifyAdminStatus], PutLeaveApplicationsController);
+Router.get('/leave-applications/:id', [VerifyJWTToken], GetLeaveApplicationsController.Single);
 module.exports = Router;

@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const DbConnection = require('../Config/Db');
+const Employee = require('./Employee');
 const ReasonForLeave = require('./ReasonForLeave');
 
 const LeaveApplication = DbConnection.define('leave_application', {
@@ -31,6 +32,9 @@ const LeaveApplication = DbConnection.define('leave_application', {
 
 LeaveApplication.belongsTo(ReasonForLeave, {
     foreignKey: 'reason_for_leave_id'
+});
+LeaveApplication.belongsTo(Employee, {
+    foreignKey: 'employee_id'
 });
 
 module.exports = LeaveApplication;
