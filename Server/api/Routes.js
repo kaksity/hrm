@@ -28,8 +28,14 @@ const DeleteLeaveApplicationsController = require('../controllers/LeaveApplicati
 const GetLeaveApplicationsController = require('../controllers/LeaveApplications/GetLeaveApplicationsController');
 const PutLeaveApplicationsController = require('../controllers/LeaveApplications/PutLeaveApplicationsController');
 
+// Notice Boards
+const GetNoticeBoardsController = require('../controllers/NoticeBoards/GetNoticeBoardsController');
+
 //User Types
 const GetUserTypesController = require('../controllers/UserTypes/GetUserTypesController');
+const DeleteNoticeBoardsController = require('../controllers/NoticeBoards/DeleteNoticeBoardsController');
+const PutNoticeBoardsController = require('../controllers/NoticeBoards/PutNoticeBoardsController');
+const PostNoticeBoardsController = require('../controllers/NoticeBoards/PostNoticeBoardsController');
 const Router = Express.Router();
 
 Router.post('/login', PostLoginController);
@@ -55,6 +61,13 @@ Router.get('/reason-for-leaves', [VerifyJWTToken], GetReasonForLeavesController)
 Router.post('/reason-for-leaves', [VerifyJWTToken, VerifyAdminStatus], PostReasonForLeavesController);
 Router.delete('/reason-for-leaves/:id', [VerifyJWTToken, VerifyAdminStatus], DeleteReasonForLeavesController);
 
+// Notice Board
+Router.post('/notice-boards', [VerifyJWTToken, VerifyAdminStatus], PostNoticeBoardsController)
+Router.get('/notice-boards', [VerifyJWTToken], GetNoticeBoardsController.AllRecord);
+Router.get('/notice-boards/:id', [VerifyJWTToken], GetNoticeBoardsController.Single);
+Router.put('/notice-boards/:id', [VerifyJWTToken, VerifyAdminStatus], PutNoticeBoardsController);
+Router.delete('/notice-boards/:id', [VerifyJWTToken, VerifyAdminStatus], DeleteNoticeBoardsController);
+
 // Leave Application
 Router.post('/leave-applications', [VerifyJWTToken], PostLeaveApplicationsController);
 Router.delete('/leave-applications/:id', [VerifyJWTToken], DeleteLeaveApplicationsController);
@@ -63,4 +76,5 @@ Router.get('/leave-applications/admin/', [VerifyJWTToken, VerifyAdminStatus], Ge
 Router.get('/leave-applications/admin/details/:id', [VerifyJWTToken, VerifyAdminStatus], GetLeaveApplicationsController.AdminSingle);
 Router.put('/leave-applications/admin/details/:id', [VerifyJWTToken, VerifyAdminStatus], PutLeaveApplicationsController);
 Router.get('/leave-applications/:id', [VerifyJWTToken], GetLeaveApplicationsController.Single);
+
 module.exports = Router;
