@@ -59,26 +59,6 @@
                   >
                     <v-flex>
                       <v-btn
-                        flat
-                        small
-                        color="primary"
-                        @click="redirectForgotPassword"
-                      >
-                        {{ $t('common.forgetPassword') }}
-                      </v-btn>
-                    </v-flex>
-                    <v-flex>
-                      <v-btn
-                        flat
-                        small
-                        color="primary"
-                        @click="redirectRegister"
-                      >
-                        Register
-                      </v-btn>
-                    </v-flex>
-                    <v-flex>
-                      <v-btn
                         :loading="loginLoading"
                         @click="login"
                       >
