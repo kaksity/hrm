@@ -5,7 +5,7 @@ import Register from '@/views/auth/Register.vue';
 import Layout from '@/views/layouts/AppLayout.vue';
 import Employees from './modules/Employees';
 import LeavesApplications from './modules/LeavesApplications';
-
+import NoticeBoard from './modules/NoticeBoard';
 Vue.use(Router);
 
 /**
@@ -18,107 +18,124 @@ Vue.use(Router);
  * }
  */
 export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  scrollBehavior: () => ({ y: 0 }),
-  routes: [{
-    path: '/login',
-    name: 'Login',
-    component: Login,
-    meta: {
-      hidden: true,
-    },
-  },
-  {
-    path: '/register',
-    name: 'Register',
-    component: Register,
-    meta: {
-      hidden: true,
-    },
-  },
-  {
-    path: '/',
-    redirect: { name: 'Dashboard' },
-    meta: {
-      hidden: true,
-    },
-  },
-  {
-    path: '/index',
-    name: 'Index',
-    component: Layout,
-    redirect: { name: 'Dashboard' },
-    meta: {
-      hidden: false,
-      hasMulSub: false,
-    },
-    children: [{
-      path: '/dashboard',
-      name: 'Dashboard',
-      component: () => import('@/views/dashboard/TheIndex.vue'),
-      meta: {
-        icon: 'dashboard',
-      },
-    },
-    Employees,
-    LeavesApplications,
-    {
-      path: '/positions',
-      name: 'Positions',
-      meta: {
-        icon: 'dashboard',
-        hidden: false,
-      },
-      component: () => import('@/views/Positions/Positions.vue'),
-    },
-    {
-      path: '/employees/view-details/:id',
-      name: 'EmployeeDetails',
-      meta: {
-        hidden: true,
-      },
-      component: () => import('@/views/Employees/ViewAndUpdate.vue'),
-    },
-    {
-      path: '/leaves-applications/pending/details/:id',
-      name: 'LeavePendingDetails',
-      meta: {
-        hidden: true,
-      },
-      component: () => import('@/views/LeaveApplications/Details.vue'),
-    },
-    {
-      path: '/leaves-applications/approved/details/:id',
-      name: 'LeaveApprovedDetails',
-      meta: {
-        hidden: true,
-      },
-      component: () => import('@/views/LeaveApplications/Details.vue'),
-    },
-    {
-      path: '/leaves-applications/rejected/details/:id',
-      name: 'LeaveApprovedDetails',
-      meta: {
-        hidden: true,
-      },
-      component: () => import('@/views/LeaveApplications/Details.vue'),
-    },
+    mode: 'history',
+    base: process.env.BASE_URL,
+    scrollBehavior: () => ({ y: 0 }),
+    routes: [{
+            path: '/login',
+            name: 'Login',
+            component: Login,
+            meta: {
+                hidden: true,
+            },
+        },
+        {
+            path: '/register',
+            name: 'Register',
+            component: Register,
+            meta: {
+                hidden: true,
+            },
+        },
+        {
+            path: '/',
+            redirect: { name: 'Dashboard' },
+            meta: {
+                hidden: true,
+            },
+        },
+        {
+            path: '/index',
+            name: 'Index',
+            component: Layout,
+            redirect: { name: 'Dashboard' },
+            meta: {
+                hidden: false,
+                hasMulSub: false,
+            },
+            children: [{
+                    path: '/dashboard',
+                    name: 'Dashboard',
+                    component: () =>
+                        import ('@/views/dashboard/TheIndex.vue'),
+                    meta: {
+                        icon: 'dashboard',
+                    },
+                },
+                Employees,
+                LeavesApplications,
+                NoticeBoard,
+                {
+                    path: '/positions',
+                    name: 'Positions',
+                    meta: {
+                        icon: 'dashboard',
+                        hidden: false,
+                    },
+                    component: () =>
+                        import ('@/views/Positions/Positions.vue'),
+                },
+                {
+                    path: '/employees/view-details/:id',
+                    name: 'EmployeeDetails',
+                    meta: {
+                        hidden: true,
+                    },
+                    component: () =>
+                        import ('@/views/Employees/ViewAndUpdate.vue'),
+                },
+                {
+                    path: '/leaves-applications/pending/details/:id',
+                    name: 'LeavePendingDetails',
+                    meta: {
+                        hidden: true,
+                    },
+                    component: () =>
+                        import ('@/views/LeaveApplications/Details.vue'),
+                },
+                {
+                    path: '/notice-boards/details/:id',
+                    name: 'NoticeBoardsDetails',
+                    meta: {
+                        hidden: true,
+                    },
+                    component: () =>
+                        import ('@/views/NoticeBoards/Details.vue'),
+                },
+                {
+                    path: '/leaves-applications/approved/details/:id',
+                    name: 'LeaveApprovedDetails',
+                    meta: {
+                        hidden: true,
+                    },
+                    component: () =>
+                        import ('@/views/LeaveApplications/Details.vue'),
+                },
+                {
+                    path: '/leaves-applications/rejected/details/:id',
+                    name: 'LeaveApprovedDetails',
+                    meta: {
+                        hidden: true,
+                    },
+                    component: () =>
+                        import ('@/views/LeaveApplications/Details.vue'),
+                },
+            ],
+        },
+        {
+            path: '/404',
+            meta: {
+                hidden: true,
+            },
+            component: () =>
+                import ('@/views/error-pages/App404.vue'),
+        },
+        {
+            path: '*',
+            redirect: '/404',
+            meta: {
+                hidden: true,
+            },
+        },
     ],
-  },
-  {
-    path: '/404',
-    meta: {
-      hidden: true,
-    },
-    component: () => import('@/views/error-pages/App404.vue'),
-  },
-  {
-    path: '*',
-    redirect: '/404',
-    meta: {
-      hidden: true,
-    },
-  },
-  ],
 });
